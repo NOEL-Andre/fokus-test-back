@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Config\ExpenseReportType;
 use App\Repository\ExpenseReportRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ApiResource]
 #[ORM\Entity(repositoryClass: ExpenseReportRepository::class)]
 class ExpenseReport
 {
@@ -26,6 +28,14 @@ class ExpenseReport
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $recordDate = null;
+
+    #[ORM\ManyToOne(inversedBy: 'expenseReports')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $refundUser = null;
+
+    #[ORM\ManyToOne(inversedBy: 'expenseReports')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Company $refundCompany = null;
 
     public function getId(): ?int
     {
@@ -77,6 +87,30 @@ class ExpenseReport
     public function setRecordDate(\DateTimeInterface $recordDate): self
     {
         $this->recordDate = $recordDate;
+
+        return $this;
+    }
+
+    public function getRefundUser(): ?User
+    {
+        return $this->refundUser;
+    }
+
+    public function setRefundUser(?User $refundUser): self
+    {
+        $this->refundUser = $refundUser;
+
+        return $this;
+    }
+
+    public function getRefundCompany(): ?Company
+    {
+        return $this->refundCompany;
+    }
+
+    public function setRefundCompany(?Company $refundCompany): self
+    {
+        $this->refundCompany = $refundCompany;
 
         return $this;
     }
