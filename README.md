@@ -6,8 +6,8 @@
 - Run `docker-compose build --pull --no-cache` at root of the project
 - Run `docker-compose up -d` at root of the project
 
-- Connect to docker php service and run `php bin/console doctrine:databas:create` to create api database if not exists
-- Connect to docker php service and run `APP_ENV=test php bin/console doctrine:databas:create` to create api_test database if not exists
+- Connect to docker php service and run `php bin/console doctrine:database:create` to create api database if not exists
+- Connect to docker php service and run `APP_ENV=test php bin/console doctrine:database:create` to create api_test database if not exists
 
 - Connect to docker php service and run `php bin/console doctrine:migrations:migrate` to create database schema
 - Connect to docker php service and run `APP_ENV=test php bin/console doctrine:migrations:migrate` to create database schema for test environment
