@@ -6,9 +6,12 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Config\ExpenseReportType;
 use App\Repository\ExpenseReportRepository;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use App\EventListener\ExpenseReportListener;
 
 #[ApiResource]
+#[ORM\EntityListeners([ExpenseReportListener::class])]
 #[ORM\Entity(repositoryClass: ExpenseReportRepository::class)]
 class ExpenseReport
 {
@@ -27,6 +30,7 @@ class ExpenseReport
     private ExpenseReportType $type;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\GreaterThanOrEqual(propertyPath: 'paymentDate')]
     private ?\DateTimeInterface $recordDate = null;
 
     #[ORM\ManyToOne(inversedBy: 'expenseReports')]

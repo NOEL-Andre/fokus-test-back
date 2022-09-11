@@ -67,7 +67,6 @@ class ExpenseReportTest extends ApiTestCase
                 'paymentDate' => (new DateTime())->sub(new \DateInterval('P3D'))->format('Y-m-d'),
                 'amount' => 50,
                 'type' => ExpenseReportType::essence,
-                'recordDate' => (new DateTime())->format('Y-m-d'),
             ]]
         );
 
